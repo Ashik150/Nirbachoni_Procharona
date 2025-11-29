@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
       className="relative pt-10 md:pt-14 pb-0 bg-[#f0fdfa] overflow-hidden"
     >
 
-      <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center relative z-10">
+      <div className="w-full max-w-6xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center relative z-10">
         <div className="order-2 md:order-1 space-y-3 md:w-7/12 relative z-20">
           <div className="inline-block bg-brand-light text-brand-dark px-4 py-1 rounded-full text-sm font-semibold border border-[#b2dfdb]">
             🗳️ আসন্ন নির্বাচনে আপনার বিশ্বস্ত সাথী

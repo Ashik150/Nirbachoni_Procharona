@@ -196,7 +196,6 @@ const Feedback: React.FC = () => {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <span className="text-xs text-slate-500">{formatDate(post.timestamp)}</span>
                                                 </div>
                                                 <p className="text-slate-600 text-sm leading-relaxed">{post.message}</p>
                                             </div>

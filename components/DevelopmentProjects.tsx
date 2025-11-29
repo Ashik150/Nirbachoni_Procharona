@@ -125,31 +125,6 @@ const DevelopmentProjects: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Social Connect Strip */}
-                <div className="mt-20 p-8 md:p-12 bg-brand-accent rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
-                    {/* Background Decoration */}
-                    <div className="absolute -right-20 -top-20 w-64 h-64 bg-brand rounded-full blur-3xl opacity-20"></div>
-
-                    <div className="relative z-10 text-center md:text-left">
-                        <h3 className="text-3xl font-bold mb-2">সংযুক্ত থাকুন সবসময়</h3>
-                        <p className="text-slate-400">রিয়েল-টাইম আপডেট পেতে আমাদের সোশ্যাল মিডিয়া ফলো করুন</p>
-                    </div>
-
-                    <div className="flex gap-4 relative z-10">
-                        <a href="#" className="w-12 h-12 bg-white/10 hover:bg-[#1877F2] rounded-full flex items-center justify-center transition-all hover:scale-110">
-                            <Facebook size={24} />
-                        </a>
-                        <a href="#" className="w-12 h-12 bg-white/10 hover:bg-[#FF0000] rounded-full flex items-center justify-center transition-all hover:scale-110">
-                            <Youtube size={24} />
-                        </a>
-                        <a href="#" className="w-12 h-12 bg-white/10 hover:bg-[#E1306C] rounded-full flex items-center justify-center transition-all hover:scale-110">
-                            <Instagram size={24} />
-                        </a>
-                        <a href="#" className="w-12 h-12 bg-white/10 hover:bg-[#1DA1F2] rounded-full flex items-center justify-center transition-all hover:scale-110">
-                            <Twitter size={24} />
-                        </a>
-                    </div>
-                </div>
             </div>
         </section>
     );

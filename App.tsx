@@ -28,8 +28,8 @@ function App() {
                   <About />
                   <Updates />
                   <Manifesto />
-                  <Feedback />
                   <DevelopmentProjects />
+                  <Feedback />
                 </main>
                 <Footer />
               </>
