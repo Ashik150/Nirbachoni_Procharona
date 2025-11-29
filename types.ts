@@ -24,3 +24,21 @@ export interface NavItem {
   label: string;
   id: string;
 }
+
+export interface ManifestoItem {
+  id: string;
+  title: string;
+  shortDesc: string;
+  fullDesc: string;
+  videoUrl: string;
+  videoThumbnail: string;
+  videoTag: string;
+}
+
+export interface FeedbackPost {
+  id: number;
+  name: string;
+  message: string;
+  date: string;
+  timestamp: number;
+}
