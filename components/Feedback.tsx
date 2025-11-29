@@ -172,9 +172,18 @@ const Feedback: React.FC = () => {
                                 {feedbackPosts.map((post, index) => (
                                     <div
                                         key={post._id}
-                                        className={`bg-white p-5 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${!showAll && index >= 3 ? 'opacity-40 blur-[1px]' : 'opacity-100'
+                                        className={`bg-white p-4 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${!showAll && index >= 3 ? 'opacity-40 blur-[1px]' : 'opacity-100'
                                             }`}
                                     >
+                                        {/* Tag in top-right corner */}
+                                        {post.tag && (
+                                            <div className="flex justify-end mb-3">
+                                                <span className="bg-brand/10 text-brand text-xs px-2 py-0.5 rounded-full font-semibold">
+                                                    {post.tag}
+                                                </span>
+                                            </div>
+                                        )}
+
                                         <div className="flex items-start gap-4">
                                             {/* Avatar - Default Profile Picture */}
                                             <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
@@ -187,16 +196,7 @@ const Feedback: React.FC = () => {
 
                                             {/* Content */}
                                             <div className="flex-1">
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <div className="flex items-center gap-2">
-                                                        <h4 className="font-bold text-slate-800">{post.name}</h4>
-                                                        {post.tag && (
-                                                            <span className="bg-brand/10 text-brand text-xs px-2 py-0.5 rounded-full font-semibold">
-                                                                {post.tag}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                </div>
+                                                <h4 className="font-bold text-slate-800 mb-2">{post.name}</h4>
                                                 <p className="text-slate-600 text-sm leading-relaxed">{post.message}</p>
                                             </div>
                                         </div>
