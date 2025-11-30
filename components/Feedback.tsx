@@ -429,7 +429,7 @@ const Feedback: React.FC = () => {
                                         <div
                                             key={post._id}
                                             className={`bg-white p-5 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${
-                                                !showAll && index >= 3 ? 'blur-sm opacity-60' : ''
+                                                !showAll && index >= 3 ? 'blur-[0.5px] opacity-90' : ''
                                             }`}
                                         >
                                             <div className="flex items-start gap-3">
@@ -465,7 +465,7 @@ const Feedback: React.FC = () => {
                                     <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-blue-50 via-blue-50/90 to-transparent flex items-end justify-center pb-6 pointer-events-none">
                                         <button
                                             onClick={() => setShowAll(true)}
-                                            className="bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all hover:shadow-xl pointer-events-auto"
+                                            className="bg-slate-800 hover:bg-slate-900 text-white font-bold mb-3 px-6 py-3 rounded-xl shadow-lg transition-all hover:shadow-xl pointer-events-auto"
                                         >
                                             আরো দেখুন
                                         </button>
