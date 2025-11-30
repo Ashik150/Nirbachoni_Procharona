@@ -224,7 +224,6 @@
 
 // export default Feedback;
 
-
 import React, { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
 
@@ -429,19 +428,10 @@ const Feedback: React.FC = () => {
                                     {feedbackPosts.map((post, index) => (
                                         <div
                                             key={post._id}
-                                            className={`bg-white p-3 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${
-                                                !showAll && index >= 2 ? 'blur-sm opacity-60' : ''
+                                            className={`bg-white p-5 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${
+                                                !showAll && index >= 3 ? 'blur-sm opacity-60' : ''
                                             }`}
                                         >
-                                            {/* Tag in top-right corner */}
-                                            {post.tag && (
-                                                <div className="flex justify-end mb-2">
-                                                    <span className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded-full font-semibold">
-                                                        {post.tag}
-                                                    </span>
-                                                </div>
-                                            )}
-
                                             <div className="flex items-start gap-3">
                                                 {/* Avatar - Default Profile Picture */}
                                                 <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
@@ -454,7 +444,15 @@ const Feedback: React.FC = () => {
 
                                                 {/* Content */}
                                                 <div className="flex-1">
-                                                    <h4 className="font-bold text-slate-800 mb-1.5">{post.name}</h4>
+                                                    {/* Name and Tag in same row */}
+                                                    <div className="flex items-center justify-between mb-1.5">
+                                                        <h4 className="font-bold text-slate-800">{post.name}</h4>
+                                                        {post.tag && (
+                                                            <span className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded-full font-semibold">
+                                                                {post.tag}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                     <p className="text-slate-600 text-sm leading-relaxed">{post.message}</p>
                                                 </div>
                                             </div>
