@@ -223,8 +223,10 @@
 // };
 
 // export default Feedback;
+
+
 import React, { useState, useEffect } from 'react';
-import { Send, ArrowDown } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 interface FeedbackPost {
     _id: string;
@@ -297,7 +299,6 @@ const DUMMY_FEEDBACK: FeedbackPost[] = [
 const Feedback: React.FC = () => {
     const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
-    const [showAll, setShowAll] = useState(false);
     const [feedbackPosts, setFeedbackPosts] = useState<FeedbackPost[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -335,20 +336,6 @@ const Feedback: React.FC = () => {
             setSubmitted(false);
             setFormData({ name: '', phone: '', message: '' });
         }, 3000);
-    };
-
-    // Helper function to format date
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffMs = now.getTime() - date.getTime();
-        const diffMins = Math.floor(diffMs / 60000);
-        const diffHours = Math.floor(diffMs / 3600000);
-        const diffDays = Math.floor(diffMs / 86400000);
-
-        if (diffMins < 60) return `${diffMins} মিনিট আগে`;
-        if (diffHours < 24) return `${diffHours} ঘন্টা আগে`;
-        return `${diffDays} দিন আগে`;
     };
 
     return (
@@ -415,26 +402,28 @@ const Feedback: React.FC = () => {
                         </form>
                     </div>
 
-                    {/* Right: Latest Posts - 5 posts, first 3 clear, last 2 faded */}
-                    <div>
-                        <h3 className="text-2xl font-bold text-slate-800 mb-6">সাম্প্রতিক মতামত</h3>
+                    {/* Right: Latest Posts - Scrollable container */}
+                    <div className="bg-blue-50/50 p-8 md:p-10 rounded-3xl border border-blue-100 shadow-lg relative overflow-hidden">
+                        {/* Decorative blob */}
+                        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-br-full opacity-50 pointer-events-none"></div>
+
+                        <h3 className="text-2xl font-bold text-slate-800 mb-6 relative z-10">সাম্প্রতিক মতামত</h3>
 
                         {loading ? (
-                            <div className="text-center py-12">
+                            <div className="text-center py-12 h-96 flex flex-col items-center justify-center">
                                 <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                                 <p className="mt-4 text-slate-600">লোড হচ্ছে...</p>
                             </div>
                         ) : feedbackPosts.length === 0 ? (
-                            <div className="bg-slate-100 border border-slate-200 rounded-xl p-6 text-center">
+                            <div className="bg-slate-100 border border-slate-200 rounded-xl p-6 text-center h-96 flex items-center justify-center">
                                 <p className="text-slate-600">এখনো কোনো মতামত নেই। প্রথম মতামত দিন!</p>
                             </div>
                         ) : (
-                            <div className="space-y-4 relative">
-                                {feedbackPosts.map((post, index) => (
+                            <div className="h-96 overflow-y-auto pr-2 space-y-4 scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#bfdbfe transparent' }}>
+                                {feedbackPosts.map((post) => (
                                     <div
                                         key={post._id}
-                                        className={`bg-white p-4 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${!showAll && index >= 3 ? 'opacity-40 blur-[1px]' : 'opacity-100'
-                                            }`}
+                                        className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md"
                                     >
                                         {/* Tag in top-right corner */}
                                         {post.tag && (
@@ -463,17 +452,6 @@ const Feedback: React.FC = () => {
                                         </div>
                                     </div>
                                 ))}
-
-                                {!showAll && feedbackPosts.length > 3 && (
-                                    <div className="absolute bottom-0 left-0 right-0 flex justify-center pt-8 pb-2 bg-gradient-to-t from-slate-50 to-transparent">
-                                        <button
-                                            onClick={() => setShowAll(true)}
-                                            className="bg-white text-slate-800 px-6 py-2 rounded-full font-bold shadow-md border border-slate-200 hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2 text-sm"
-                                        >
-                                            আরো দেখুন <ArrowDown size={16} />
-                                        </button>
-                                    </div>
-                                )}
                             </div>
                         )}
                     </div>
