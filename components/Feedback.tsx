@@ -301,6 +301,7 @@ const Feedback: React.FC = () => {
     const [submitted, setSubmitted] = useState(false);
     const [feedbackPosts, setFeedbackPosts] = useState<FeedbackPost[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showAll, setShowAll] = useState(false);
 
     // Load dummy data on mount
     useEffect(() => {
@@ -419,39 +420,59 @@ const Feedback: React.FC = () => {
                                 <p className="text-slate-600">এখনো কোনো মতামত নেই। প্রথম মতামত দিন!</p>
                             </div>
                         ) : (
-                            <div className="h-96 overflow-y-auto pr-2 space-y-4 scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#bfdbfe transparent' }}>
-                                {feedbackPosts.map((post) => (
-                                    <div
-                                        key={post._id}
-                                        className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md"
-                                    >
-                                        {/* Tag in top-right corner */}
-                                        {post.tag && (
-                                            <div className="flex justify-end mb-3">
-                                                <span className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded-full font-semibold">
-                                                    {post.tag}
-                                                </span>
-                                            </div>
-                                        )}
+                            <div className="relative">
+                                {/* Preview or Full View */}
+                                <div 
+                                    className={`space-y-3 ${!showAll ? 'h-[500px] overflow-hidden' : 'h-[500px] overflow-y-auto scroll-smooth pr-2'}`}
+                                    style={showAll ? { scrollbarWidth: 'thin', scrollbarColor: '#bfdbfe transparent' } : {}}
+                                >
+                                    {feedbackPosts.map((post, index) => (
+                                        <div
+                                            key={post._id}
+                                            className={`bg-white p-3 rounded-xl shadow-sm border border-slate-100 transition-all hover:shadow-md ${
+                                                !showAll && index >= 2 ? 'blur-sm opacity-60' : ''
+                                            }`}
+                                        >
+                                            {/* Tag in top-right corner */}
+                                            {post.tag && (
+                                                <div className="flex justify-end mb-2">
+                                                    <span className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded-full font-semibold">
+                                                        {post.tag}
+                                                    </span>
+                                                </div>
+                                            )}
 
-                                        <div className="flex items-start gap-4">
-                                            {/* Avatar - Default Profile Picture */}
-                                            <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
-                                                <img
-                                                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                                    alt="User Avatar"
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                {/* Avatar - Default Profile Picture */}
+                                                <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
+                                                    <img
+                                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                                                        alt="User Avatar"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
 
-                                            {/* Content */}
-                                            <div className="flex-1">
-                                                <h4 className="font-bold text-slate-800 mb-2">{post.name}</h4>
-                                                <p className="text-slate-600 text-sm leading-relaxed">{post.message}</p>
+                                                {/* Content */}
+                                                <div className="flex-1">
+                                                    <h4 className="font-bold text-slate-800 mb-1.5">{post.name}</h4>
+                                                    <p className="text-slate-600 text-sm leading-relaxed">{post.message}</p>
+                                                </div>
                                             </div>
                                         </div>
+                                    ))}
+                                </div>
+
+                                {/* Fade overlay and "See More" button */}
+                                {!showAll && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-blue-50 via-blue-50/90 to-transparent flex items-end justify-center pb-6 pointer-events-none">
+                                        <button
+                                            onClick={() => setShowAll(true)}
+                                            className="bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all hover:shadow-xl pointer-events-auto"
+                                        >
+                                            আরো দেখুন
+                                        </button>
                                     </div>
-                                ))}
+                                )}
                             </div>
                         )}
                     </div>
